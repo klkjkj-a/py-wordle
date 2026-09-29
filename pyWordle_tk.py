@@ -6,6 +6,7 @@ import random
 root = tk.Tk()
 root.title('pyWordle')
 root.geometry('600x800')
+root.iconbitmap('logo.ico')
 root.resizable(False, False)
 
 NUM_ROWS = 6
@@ -29,6 +30,7 @@ def rule():
     window_rule = tk.Toplevel(root)
     window_rule.title("规则")
     window_rule.geometry("470x190")
+    window_rule.iconbitmap('logo.ico')
     window_rule.resizable(False, False)
 
     window_rule.focus_set()
@@ -41,7 +43,7 @@ def rule():
 每个字母的颜色代表它的状态。
  · 绿色：字母和位置都正确。
  · 黄色：字母存在但位置不正确。
- · 白色：字母不在目标单词中。''', font=('微软雅黑', 11), anchor='w', justify='left').pack(anchor='w', fill='x', padx=10, pady=10)
+ · 灰色：字母不在目标单词中。''', font=('微软雅黑', 11), anchor='w', justify='left').pack(anchor='w', fill='x', padx=10, pady=10)
 
     tk.Button(window_rule, text='确定', command=close_window_rule).pack(pady=1)
 
@@ -56,6 +58,7 @@ def options():
     window_options = tk.Toplevel(root)
     window_options.title("设置")
     window_options.geometry("470x170")
+    window_options.iconbitmap('logo.ico')
     window_options.resizable(False, False)
 
     window_options.focus_set()
@@ -103,6 +106,7 @@ def about_game():
     window_about = tk.Toplevel(root)
     window_about.title("关于游戏")
     window_about.geometry("470x170")
+    window_about.iconbitmap('logo.ico')
     window_about.resizable(False, False)
 
     window_about.focus_set()
