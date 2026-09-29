@@ -240,7 +240,7 @@ def make_click(i):
             buttons[i].grid_remove()
             rows[i].on_change = None
             rows[i].disable()
-            guessed.append(rows[i].get_code())
+            guessed.append(word_string)
         
             word_guessed = list(word_string)
 

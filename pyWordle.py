@@ -17,8 +17,8 @@ rule = f'''
 '''
 
 def initialize():
-    command = input('输入 n 进入新游戏，输入 q 退出，输入 r 查看规则。\n\n$ ')
-    while True: 
+    while True:
+        command = input('输入 n 进入新游戏，输入 q 退出，输入 r 查看规则。\n\n$ ')
         if command == 'n':
             system('cls')
             game()
@@ -68,7 +68,7 @@ def game():
 
         if guess == word_chosen:
             clear_previous_line(n=1)
-            print(f'\r{colored(guess, 'green')}', flush=True)
+            print(f"\r{colored(guess, 'green')}", flush=True)
             print(' 猜测正确。\n')
             win = 1
             initialize()
