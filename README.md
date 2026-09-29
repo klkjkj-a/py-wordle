@@ -1,5 +1,5 @@
 # py-wordle
-Wordle 小游戏的 Python实现。
+Wordle 小游戏的 Python 实现。使用 Python 3.12.2.
 ## pyWordle.py
 以命令行界面呈现。需要和 words.txt 在同一目录下才能运行。
 ## pyWordle_tk.py
