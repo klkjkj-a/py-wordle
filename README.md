@@ -16,7 +16,7 @@ pyWordle_tk.py的代码大部分由 DeepSeek 生成。
 ## Release
 Release 中是最终的发行版安装包。建议在 64 位 Windows 系统安装。
 
-在发行版中，word.txt 和 .exe 格式的主程序在同一个文件夹内。
+在发行版中，words.txt 和 .exe 格式的主程序在同一个文件夹内。
 
 发现词库缺词，最好要以 issue 的形式上报。可以直接修改词库。对软件的一切修改都必须符合 GPL 许可证的规定。
 ## 关于图标
