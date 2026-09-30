@@ -17748,6 +17748,7 @@ tenuous
 tenure
 tepid
 term
+terms
 terminal
 terminate
 termination
@@ -18414,3 +18415,4 @@ beautify
 beautifies
 beautified
 beautifying
+folks
