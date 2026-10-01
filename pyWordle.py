@@ -50,11 +50,12 @@ def game():
     if lines:
         while True:
             word_chosen = random.choice(lines).rstrip('\n')
+            word_chosen = word_chosen.lower()
             if len(word_chosen) == word_length:
                 break
 
     # ·· 调 ··· ··· 试 ··· ··· 调 ··· ··· 试 ··· ··· 调 ··· ··· 试 ··· 
-    print(f'调试：[{word_chosen}]')
+    # print(f'调试：[{word_chosen}]')
     # ·· 调 ··· ··· 试 ··· ··· 调 ··· ··· 试 ··· ··· 调 ··· ··· 试 ··· 
     
     print('输入猜测的单词。\n')
