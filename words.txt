@@ -18430,3 +18430,7 @@ urine
 goat
 goats
 pianoforte
+bark
+barks
+barking
+barked
