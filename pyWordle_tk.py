@@ -10,7 +10,8 @@ root.iconbitmap('logo.ico')
 root.resizable(False, False)
 
 NUM_ROWS = 6
-LENGTH = 5
+Length = 5
+t = 0
 
 word_chosen = ''
 lines = []
@@ -38,8 +39,8 @@ def rule():
     def close_window_rule():
         window_rule.destroy()
 
-    tk.Label(window_rule, text=f'''用 6 次机会猜测一个字母数为 {LENGTH} 的英文单词。
-输入猜测的单词后按下确定按钮。输入不区分大小写。
+    tk.Label(window_rule, text=f'''用 6 次机会猜测一个字母数为 {Length} 的英文单词。
+输入猜测的单词后按下回车键或确定按钮。输入不区分大小写。
 每个字母的颜色代表它的状态。
  · 绿色：字母和位置都正确。
  · 黄色：字母存在但位置不正确。
@@ -84,10 +85,10 @@ def options():
     combo.place(x=120, y=70)
     
     def c():
-        global LENGTH
-        if int(lettersnum_string.get()) != LENGTH:
+        global Length
+        if int(lettersnum_string.get()) != Length:
             window_options.destroy()
-            LENGTH = int(lettersnum_string.get())
+            Length = int(lettersnum_string.get())
             start()
         else:
             window_options.destroy()
@@ -184,6 +185,14 @@ container.pack(pady=20)
 rows = []
 buttons = []
 
+# 先创建底部 Frame，并让它贴在窗口底部
+bottom_frame = tk.Frame(root, bg="#d0e8ff", height=350)
+bottom_frame.pack(side=tk.BOTTOM, fill=tk.X)
+bottom_frame.pack_propagate(False)  # 固定高度，防止被内部组件压缩
+
+#tk.Button(bottom_frame, text="确定").pack(side=tk.RIGHT, padx=10)
+#tk.Button(bottom_frame, text="取消").pack(side=tk.RIGHT, padx=10)
+
 def initialize():
     global rows, buttons, guessed
     rows = []
@@ -198,7 +207,7 @@ def initialize():
     buttons = []
 
     for i in range(NUM_ROWS):
-        row = CodeRow(container, LENGTH, CHAR_RANGES)
+        row = CodeRow(container, Length, CHAR_RANGES)
         row.frame.grid(row=i * 2, column=0, sticky='w', pady=(0, 4))
         rows.append(row)
 
@@ -215,13 +224,14 @@ def select_word():
     if lines:
         while True:
             word_chosen = random.choice(lines).rstrip('\n')
-            if len(word_chosen) == LENGTH:
+            if len(word_chosen) == Length:
                 break
 
 def make_check(i):
     def check():
         if rows[i].is_complete():
             buttons[i].grid()
+            root.bind("<Return>", lambda event: buttons[i].invoke())
         else:
             buttons[i].grid_remove()
     return check
@@ -229,9 +239,11 @@ def make_check(i):
 
 def make_click(i):
     def click():
-        global guessed
+        global word_chosen
+        global t
         
         win = False
+
         word_temp = list(word_chosen)
         word_guessed = []# 当前所猜的词
         word_string = (rows[i].get_code()).lower()
@@ -245,23 +257,24 @@ def make_click(i):
             rows[i].on_change = None
             rows[i].disable()
             guessed.append(word_string)
+            t += 1
         
             word_guessed = list(word_string)
 
-            for j in range(0, LENGTH):
-                if word_guessed[j] == word_chosen[j]:
+            for j in range(0, Length):
+                if word_guessed[j] == word_temp[j]:
                     word_guessed[j] = '0'
                     word_temp[j] = '1'
             
-            for k in range(0, LENGTH):
-                for l in range(0, LENGTH):
+            for k in range(0, Length):
+                for l in range(0, Length):
                     if word_guessed[k] == word_temp[l]:
                         word_guessed[k] = '2'
                         word_temp[l] = '3'
             
             word_temp = list(word_chosen)
             
-            for l in range(0, LENGTH):
+            for l in range(0, Length):
                 if word_guessed[l] == '0':
                     rows[i].entries[l].config(
                         disabledforeground='white',
@@ -284,10 +297,9 @@ def make_click(i):
         
         elif word_string in guessed:
             pass
-            #label_text = ''
-            #label = tk.Label(root, text=label_text, font=('Noto Sans SC', 14)).pack()
+        
         elif word_string == word_chosen:
-            for m in range(0, LENGTH):
+            for m in range(0, Length):
                 rows[i].entries[m].config(
                     disabledforeground='white',
                     disabledbackground='#6BAA64',
@@ -298,7 +310,7 @@ def make_click(i):
             tk.Label(root, text='猜测正确。', font=('微软雅黑', 12)).pack()
             win = True
 
-        if i == 5 and win == False:
+        if t == 6 and win == False:
             tk.Label(root, text=f'游戏结束，正确答案为 {word_chosen}。', font=('微软雅黑', 12)).pack()
             
     return click
@@ -335,12 +347,15 @@ def close_all_toplevels():
 
 def start():
     global label_text
+    global t
+    
     label_text = ''
     select_word()
     guessed.clear()     # 清空历史内容
     initialize()        # 内部已销毁旧控件并重建
     close_all_toplevels()
     hide_all_labels()
+    t = 0
 
     for i in range(NUM_ROWS):
         rows[i].on_change = make_check(i)
