@@ -7,8 +7,6 @@ Wordle 小游戏的 Python 实现。使用 Python 3.12.2.
 ## words.txt
 词库。Python 从这个文件抽取单词。
 
-词库来自 [https://github.com/dwyl/english-words] 仓库。
-
 保留词库原有 Unlicense 许可证。根据许可证规定，词库实际已进入公共领域（public domain）。
 
 **Python 代码仍然以原 GPL 许可证开源。**
@@ -16,7 +14,7 @@ Wordle 小游戏的 Python 实现。使用 Python 3.12.2.
 ## 致谢
 pyWordle_tk.py的代码大部分由 DeepSeek 生成。
 
-词库来自公开语料数据，很多词的变化形式由腾讯元宝补充。
+词库来自词库来自 [https://github.com/dwyl/english-words] 仓库。
 
 ## Release
 Release 中是最终的发行版安装包。建议在 64 位 Windows 系统安装。
