@@ -14,7 +14,7 @@ Wordle 小游戏的 Python 实现。使用 Python 3.12.2.
 ## 致谢
 pyWordle_tk.py的代码大部分由 DeepSeek 生成。
 
-词库来自词库来自 [https://github.com/dwyl/english-words] 仓库。
+词库来自 [https://github.com/dwyl/english-words] 仓库。
 
 ## Release
 Release 中是最终的发行版安装包。建议在 64 位 Windows 系统安装。
